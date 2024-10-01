@@ -18,17 +18,16 @@ import io.jsonwebtoken.security.Keys;
 public class JwtService {
     private static final String SECRET = "ahsffbcbfguyrfyueoqrquwcbfggbglfqalfsgfbafbhafbgfaskfasajksfqwertyujhbgfdsazx";
 
-    public String generateToken(String username){
+    public String generatetoken(String username){
         Map<String, Objects> claims = new HashMap<>();
         return Jwts.builder().
                     setClaims(claims).
                     setSubject(username).
                     setIssuedAt(new Date(System.currentTimeMillis())).
-                    setExpiration(new Date(System.currentTimeMillis() + 1000 * 600 * 30)).
-                    signWith(getSignInKey(),SignatureAlgorithm.HS256).
+                    setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30)).
+                    signWith(getSignInKey(), SignatureAlgorithm.HS256).
                     compact();
     }
-
     private Claims extractAllClaims(String token){
         return Jwts.parserBuilder().
                     setSigningKey(getSignInKey()).
