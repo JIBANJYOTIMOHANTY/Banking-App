@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Admin {
     private Integer id;
-    private String name;
+    private String username;
     private String password;
+    private String role;
 }
