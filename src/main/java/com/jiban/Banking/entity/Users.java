@@ -16,7 +16,7 @@ public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
+    private String username;
     private String email;
     private double balance;
 }
