@@ -19,15 +19,14 @@ public class JwtService {
     private static final String SECRET = "ahsffbcbfguyrfyueoqrquwcbfggbglfqalfsgfbafbhafbgfaskfasajksfqwertyujhbgfdsazx";
 
     public String generateToken(String username){
-        Map<String, Object> claims = new HashMap<>();
+        Map<String, Objects> claims = new HashMap<>();
         return Jwts.builder().
-                setClaims(claims).
-                setSubject(username).
-                setIssuedAt(new Date(System.currentTimeMillis())).
-                setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30)).
-                signWith(getSignInKey(),SignatureAlgorithm.HS256).
-                compact();
-            
+                    setClaims(claims).
+                    setSubject(username).
+                    setIssuedAt(new Date(System.currentTimeMillis())).
+                    setExpiration(new Date(System.currentTimeMillis() + 1000 * 600 * 30)).
+                    signWith(getSignInKey(),SignatureAlgorithm.HS256).
+                    compact();
     }
 
     private Claims extractAllClaims(String token){
