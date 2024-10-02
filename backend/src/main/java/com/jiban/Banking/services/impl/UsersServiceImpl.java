@@ -18,43 +18,47 @@ import com.jiban.Banking.services.AdminDetails;
 import com.jiban.Banking.services.UsersService;
 
 @Service
-public class UsersServiceImpl implements UsersService, UserDetailsService {
+public class UsersServiceImpl implements UsersService  {
 
     @Autowired
-    private AdminRepository adminRepository;
+    private UsersRepository usersRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Override
-    public Users createUsers(Users users) {
-        return null;
+    public String createUsers(Users users) {
+        usersRepository.save(users);
+        return "User Created Successfully.";
     }
 
     @Override
     public List<Users> getAllUsers() {
-        return null;
+        return usersRepository.findAll();
     }
 
     @Override
-    public void getUsersById(int id) {
-        
+    public Users getUsersById(Integer id) {
+        return usersRepository.findById(id).get();   
     }
 
     @Override
-    public String updateUsers(Long id, Users users) {
-        return null;
+    public String updateUsers(Integer id, Users users) {
+        Optional<Users> user = usersRepository.findById(id);
+        if(user.isPresent()){
+            Users foundUser = user.get();
+            foundUser.setUsername(users.getUsername());
+            foundUser.setBalance(users.getBalance());
+            foundUser.setEmail(users.getEmail());
+        } else {
+            new RuntimeException("User not found with specified id : " + id);
+        }
+        return "User updated successfully.";
     }
 
     @Override
-    public void deleteUsers(Long id) {
-        
+    public String deleteUsers(Integer id) {
+        usersRepository.deleteById(id);
+        return "User deleted successfully.";
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Admin> admins = adminRepository.findByName(username);
-        return admins.map(AdminDetails::new).orElseThrow(() -> new UsernameNotFoundException("User not found : " + username));
-    }
     
 }
