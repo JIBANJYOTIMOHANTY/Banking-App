@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.jiban.Banking.entity.Admin;
 import com.jiban.Banking.entity.Users;
@@ -16,6 +17,7 @@ import com.jiban.Banking.repository.UsersRepository;
 import com.jiban.Banking.services.AdminDetails;
 import com.jiban.Banking.services.UsersService;
 
+@Service
 public class UsersServiceImpl implements UsersService, UserDetailsService {
 
     @Autowired
