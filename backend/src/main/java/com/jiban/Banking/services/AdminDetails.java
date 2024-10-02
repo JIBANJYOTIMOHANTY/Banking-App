@@ -11,12 +11,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.jiban.Banking.entity.Admin;
 
-public class UsersDetails implements UserDetails {
+public class AdminDetails implements UserDetails {
     private String username;
     private String password;
     List<GrantedAuthority> authorities;
 
-    public UsersDetails(Admin admin){
+    public AdminDetails(Admin admin){
         username = admin.getUsername();
         password = admin.getPassword();
         authorities = Arrays.stream(admin.getRole().split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
