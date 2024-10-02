@@ -7,10 +7,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.jiban.Banking.entity.Admin;
 import com.jiban.Banking.repository.AdminRepository;
 
+@Service
 public class AdminService implements UserDetailsService {
 
     @Autowired
@@ -25,6 +27,7 @@ public class AdminService implements UserDetailsService {
         return admins.map(AdminDetails::new)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found : " + username));
     }
+
 
     public String addAdmin(Admin admin){
         admin.setPassword(passwordEncoder.encode(admin.getPassword()));
