@@ -9,5 +9,5 @@ import com.jiban.Banking.entity.Users;
 
 @Repository
 public interface UsersRepository extends JpaRepository<Users, Integer> {
-    
+    Optional<Users> findByName(String name)   ;
 }
