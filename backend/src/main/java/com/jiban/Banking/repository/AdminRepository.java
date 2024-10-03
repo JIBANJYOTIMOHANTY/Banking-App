@@ -9,5 +9,5 @@ import com.jiban.Banking.entity.Admin;
 
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Integer>{
-    Optional<Admin> findByName(String userName)   ;
+    Optional<Admin> findByUsername(String username)   ;
 }

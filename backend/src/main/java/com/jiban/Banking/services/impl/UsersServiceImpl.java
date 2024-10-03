@@ -39,7 +39,7 @@ public class UsersServiceImpl implements UsersService  {
         Optional<Users> user = usersRepository.findById(id);
         if(user.isPresent()){
             Users foundUser = user.get();
-            foundUser.setUsername(users.getUsername());
+            foundUser.setName(users.getName());
             foundUser.setBalance(users.getBalance());
             foundUser.setEmail(users.getEmail());
         } else {
