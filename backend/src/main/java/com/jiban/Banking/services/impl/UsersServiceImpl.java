@@ -12,11 +12,10 @@ import com.jiban.Banking.repository.UsersRepository;
 import com.jiban.Banking.services.UsersService;
 
 @Service
-public class UsersServiceImpl implements UsersService  {
+public class UsersServiceImpl implements UsersService {
 
     @Autowired
     private UsersRepository usersRepository;
-
 
     @Override
     public String createUsers(Users users) {
@@ -31,19 +30,18 @@ public class UsersServiceImpl implements UsersService  {
 
     @Override
     public Users getUsersById(Integer id) {
-        return usersRepository.findById(id).get();   
+        return usersRepository.findById(id).get();
     }
 
     @Override
     public String updateUsers(Integer id, Users users) {
         Optional<Users> user = usersRepository.findById(id);
-        System.out.println(user);
-        System.out.println(user.isPresent());
-        if(user.isPresent()){
+        if (user.isPresent()) {
             Users foundUser = user.get();
-            foundUser.setName(users.getName());
-            foundUser.setBalance(users.getBalance());
-            foundUser.setEmail(users.getEmail());
+            
+            foundUser.setName(users.getName() != null ? users.getName() : foundUser.getName());
+            foundUser.setBalance(users.getBalance() != 0.0 ? users.getBalance() : foundUser.getBalance());
+            foundUser.setEmail(users.getEmail() != null ? users.getEmail() : foundUser.getEmail());
             usersRepository.save(foundUser);
             return "User updated successfully.";
         } else {
@@ -57,5 +55,4 @@ public class UsersServiceImpl implements UsersService  {
         return "User deleted successfully.";
     }
 
-    
 }
