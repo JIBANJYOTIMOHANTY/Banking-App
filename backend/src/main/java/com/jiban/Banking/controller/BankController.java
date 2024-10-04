@@ -53,7 +53,7 @@ public class BankController {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(admin.getUsername(), admin.getPassword()));
         
         if(authenticate.isAuthenticated()){
-            return jwtService.generatetoken(admin.getUsername()) + "\nSignIn Successful";
+            return jwtService.generatetoken(admin.getUsername()) ;
         } else {
             throw new RuntimeException("username or password is invalid");
         }
