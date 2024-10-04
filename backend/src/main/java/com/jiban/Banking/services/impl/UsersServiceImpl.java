@@ -51,7 +51,8 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public String deleteUsers(Integer id) {
-        usersRepository.deleteById(id);
+        Users userId = usersRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found with specified id : " + id));
+        usersRepository.deleteById(userId.getId());
         return "User deleted successfully.";
     }
 
