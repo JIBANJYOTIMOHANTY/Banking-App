@@ -1,5 +1,6 @@
 package com.jiban.Banking.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -63,6 +64,12 @@ public class BankController {
     public String addUsers(@RequestBody Users users){
         usersService.createUsers(users);
         return "User created Successfully";
+    }
+
+    @GetMapping("getAll/users")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<Users> getAllUsers(){
+        return usersService.getAllUsers();
     }
 
     @PutMapping("/update/user/{id}")
