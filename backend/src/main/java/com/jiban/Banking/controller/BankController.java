@@ -1,17 +1,22 @@
 package com.jiban.Banking.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jiban.Banking.entity.Admin;
 import com.jiban.Banking.entity.Users;
+import com.jiban.Banking.repository.UsersRepository;
 import com.jiban.Banking.services.AdminService;
 import com.jiban.Banking.services.JwtService;
 import com.jiban.Banking.services.UsersService;
@@ -29,6 +34,9 @@ public class BankController {
 
     @Autowired
     private UsersService usersService;
+
+    @Autowired
+    private UsersRepository userRepository;
 
     @GetMapping("/welcome")
     public String welcome(){
@@ -56,6 +64,14 @@ public class BankController {
     public String addUsers(@RequestBody Users users){
         usersService.createUsers(users);
         return "User created Successfully";
+    }
+
+    @PutMapping("/update/user/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String updateUsers(@PathVariable Integer id, @RequestBody Users users){
+        String message = usersService.updateUsers(id, users);
+        return message;
 
     }
+
 }

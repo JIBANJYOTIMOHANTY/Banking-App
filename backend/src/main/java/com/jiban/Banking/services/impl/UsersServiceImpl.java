@@ -37,15 +37,18 @@ public class UsersServiceImpl implements UsersService  {
     @Override
     public String updateUsers(Integer id, Users users) {
         Optional<Users> user = usersRepository.findById(id);
+        System.out.println(user);
+        System.out.println(user.isPresent());
         if(user.isPresent()){
             Users foundUser = user.get();
             foundUser.setName(users.getName());
             foundUser.setBalance(users.getBalance());
             foundUser.setEmail(users.getEmail());
+            usersRepository.save(foundUser);
+            return "User updated successfully.";
         } else {
-            new RuntimeException("User not found with specified id : " + id);
+            throw new RuntimeException("User not found with specified id : " + id);
         }
-        return "User updated successfully.";
     }
 
     @Override
