@@ -35,9 +35,6 @@ public class BankController {
     @Autowired
     private UsersService usersService;
 
-    @Autowired
-    private UsersRepository userRepository;
-
     @GetMapping("/welcome")
     public String welcome(){
         return "Welcome to Bank"   ;
