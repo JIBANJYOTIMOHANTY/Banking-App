@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
 @Entity
 @Data
@@ -18,5 +19,6 @@ public class Admin {
     private Integer id;
     private String username;
     private String password;
+    @Value("ADMIN")
     private String role;
 }

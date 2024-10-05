@@ -28,9 +28,13 @@ public class AdminService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found : " + username));
     }
 
-
+    Admin admin2 = new Admin();
     public String addAdmin(Admin admin){
         admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+        System.out.println(admin.getRole());
+        if (admin.getRole() == null){
+            admin.setRole("ADMIN");
+        }
         adminRepository.save(admin);
         return "Admin added successfully";
     }
