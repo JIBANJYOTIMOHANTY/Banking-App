@@ -6,13 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.jiban.Banking.entity.Admin;
 import com.jiban.Banking.entity.Users;
@@ -22,6 +16,8 @@ import com.jiban.Banking.services.JwtService;
 import com.jiban.Banking.services.UsersService;
 
 @RestController
+@RequestMapping("/bank")
+@CrossOrigin("*")
 public class BankController {
     @Autowired
     private AdminService adminService;

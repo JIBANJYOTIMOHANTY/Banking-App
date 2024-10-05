@@ -35,7 +35,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf(csrf -> csrf.disable()).
-                        authorizeHttpRequests(auth -> auth.requestMatchers("/welcome","/signUp","signIn")
+                        authorizeHttpRequests(auth -> auth.requestMatchers("/bank/welcome","/bank/signUp","/bank/signIn")
                         .permitAll()
                         .anyRequest()
                         .authenticated())
@@ -55,6 +55,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder(){
+
         return new BCryptPasswordEncoder();
     }
 
@@ -62,5 +63,7 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
         return authenticationConfiguration.getAuthenticationManager();
     }
+
+
     
 }
