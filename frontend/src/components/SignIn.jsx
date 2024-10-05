@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../services/BankService'
+import HomePage from './HomePage'
 
 const SignIn = () => {
     const [username,setUserName] = useState()
     const [password, setPassword] = useState()
+
+    const navigator = useNavigate()
 
     const handleUserName = (e) => {
         setUserName(e.target.value)
@@ -21,10 +24,10 @@ const SignIn = () => {
         const admin = {username, password}
         console.log(admin);
         login(admin).then( (response) =>
-             {
-                console.log(response.data);
-                
-             }
+        {
+            navigator('/home')
+        }
+        ).catch(() => console.log("Invalid Credentials")
         )
     }
 
