@@ -1,6 +1,7 @@
 import React from 'react'
 
 const SignUp = () => {
+    
     return (
         <div>
             <section class="bg-gray-50 dark:bg-gray-900">
