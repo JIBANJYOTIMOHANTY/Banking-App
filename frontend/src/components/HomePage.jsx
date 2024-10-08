@@ -12,9 +12,6 @@ const HomePage = () => {
   useEffect(() => {
     getAllUsers().then((response) => {
       setData(response.data)
-      console.log(data);
-      
-      console.log(response.data);      
     }).catch(() => 
       console.log("Invalid")
     )
