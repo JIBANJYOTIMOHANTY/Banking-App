@@ -22,9 +22,10 @@ const SignIn = () => {
 
         
         const admin = {username, password}
-        console.log(admin);
         login(admin).then( (response) =>
         {
+            localStorage.setItem('token',response.data)
+            
             navigator('/home')
         }
         ).catch(() => console.log("Invalid Credentials")

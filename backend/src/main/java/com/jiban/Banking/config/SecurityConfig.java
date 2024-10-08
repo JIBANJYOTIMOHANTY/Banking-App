@@ -1,5 +1,7 @@
 package com.jiban.Banking.config;
 
+import com.jiban.Banking.filter.JwtFilter;
+import com.jiban.Banking.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,9 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.jiban.Banking.filter.JwtFilter;
-import com.jiban.Banking.services.AdminService;
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -35,7 +34,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity.csrf(csrf -> csrf.disable()).
-                        authorizeHttpRequests(auth -> auth.requestMatchers("/bank/welcome","/bank/signUp","/bank/signIn")
+                        authorizeHttpRequests(auth -> auth.requestMatchers("/bank/welcome","/bank/signUp","/bank/signIn", "/bank/getAll/users")
                         .permitAll()
                         .anyRequest()
                         .authenticated())

@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { getAllUsers } from '../services/BankService';
 
 const HomePage = () => {
   const [users, setUsers] = useState([]);
+  const [data, setData] = useState([])
   const [newUser, setNewUser] = useState({ name: '', email: '' });
   const [editUserId, setEditUserId] = useState(null);
   const [editUser, setEditUser] = useState({ name: '', email: '' });
-
+  
   // Mock fetching users (simulate an API call)
   useEffect(() => {
-    setUsers([
-      { id: 1, name: 'John Doe', email: 'john@example.com' },
-      { id: 2, name: 'Jane Doe', email: 'jane@example.com' },
-    ]);
+    getAllUsers().then((response) => {
+      setData(response.data)
+      console.log(data);
+      
+      console.log(response.data);      
+    }).catch(() => 
+      console.log("Invalid")
+    )
+    
   }, []);
 
   const handleAddUser = () => {
@@ -72,7 +79,7 @@ const HomePage = () => {
         <div className="mb-8">
           <h2 className="text-2xl font-semibold text-gray-100 mb-4">All Users</h2>
           <div className="grid sm:grid-cols-2 gap-6">
-            {users.map((user) => (
+            {(data || users).map((user) => (
               <div key={user.id} className="p-6 bg-gray-700 rounded-lg shadow-md hover:shadow-xl transition-shadow">
                 <h3 className="text-xl font-semibold text-gray-100 mb-2">{user.name}</h3>
                 <p className="text-gray-400 mb-4">{user.email}</p>
