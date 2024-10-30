@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAllUsers } from '../services/BankService';
+import { addUser, getAllUsers } from '../services/BankService';
 
 const HomePage = () => {
   const [users, setUsers] = useState([]);
@@ -7,21 +7,36 @@ const HomePage = () => {
   const [newUser, setNewUser] = useState({ name: '', email: '' });
   const [editUserId, setEditUserId] = useState(null);
   const [editUser, setEditUser] = useState({ name: '', email: '' });
-  
+
   // Mock fetching users (simulate an API call)
   useEffect(() => {
     getAllUsers().then((response) => {
       setData(response.data)
-    }).catch(() => 
+    }).catch(() =>
       console.log("Invalid")
     )
-    
+
   }, []);
 
   const handleAddUser = () => {
     if (newUser.name && newUser.email) {
-      setUsers([...users, { id: users.length + 1, ...newUser }]);
-      setNewUser({ name: '', email: '' });
+
+      const users2 = {
+        name: newUser.name,
+        email: newUser.email
+      };
+
+
+      addUser(users2).then((response) => {
+        console.log(response);
+
+        // setUsers([...users, { id: users.length + 1, ...newUser }]);
+        // setNewUser({ name: users2.name, email: users2.email });
+        console.log(response.data);
+
+        console.log("User added successfully!")
+      }).catch(() => console.log("failed to add user.")
+      )
     }
   };
 
